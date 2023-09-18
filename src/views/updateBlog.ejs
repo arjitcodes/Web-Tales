@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <%-include('partials/adminHead')%>
+        <link rel="stylesheet" href="/css/updateBlog.css">
+</head>
+
+<body>
+
+    <%-include ('partials/adminNav')%>
+
+        <form id="form">
+            <input type="file" name="thumbnail" id="thumbnailInput">
+            <img src="<%=blog.thumbnail%>" alt="" width="350" id="thumbnailImg">
+            <!-- <button type=" submit">Upload thumbnail</button> -->
+        </form>
+        <form id="updateBlogForm">
+            <input type="text" name="thumbnailUrl" value="<%=blog.thumbnail%>" id="thumbnailUrl">
+            <input type="text" name="title" id="title" placeholder="Title" value="<%=blog.title%>">
+            <select name="tag" id="tag">
+                <option value="javacript">javacript</option>
+                <option value="html">html</option>
+                <option value="css">css</option>
+                <option value="raect">raect</option>
+                <option value="nextjs">nextjs</option>
+                <option value="nodejs">nodejs</option>
+                <option value="expressjs">expressjs</option>
+                <option value="backend">backend</option>
+                <option value="monetize">monetize</option>
+                <option value="other">other</option>
+            </select>
+            <textarea type="text" name="desc" id="desc" placeholder="Description">
+                <%=blog.desc%>
+            </textarea>
+            <textarea name="body" id="editor">
+                <%=blog.body%>
+            </textarea>
+            <button type="submit" id="newBlogBtn">Publish</button>
+        </form>
+
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+        <script>
+            Array.from(document.querySelector("select").children).forEach(element => {
+                if (element.value === "<%=blog.tag%>") {
+                    return element.selected = true;
+                }
+            });
+        </script>
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#editor'), {
+                    ckfinder: {
+                        uploadUrl: 'http://localhost:3000/uploadImage'
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+        <script>
+            document.getElementById("thumbnailInput").addEventListener("change", async function (e) {
+
+                e.preventDefault();
+                const form = document.getElementById("form")
+                const newBlogform = document.getElementById("newBlogForm")
+                const thumbnailInput = document.getElementById("thumbnailUrl")
+                const oldFileUrl = thumbnailInput.value;
+                // const oldFileName = oldFileUrl.split("uploads/");
+
+                let data = new FormData(form);
+
+                const response = await fetch("/uploadCover", {
+                    method: "POST",
+                    body: data
+                })
+                const url = await response.json()
+                const img = document.getElementById("thumbnailImg")
+                thumbnailInput.value = url.url;
+                img.src = url.url;
+                const r = await fetch(`/delete`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify({ url: oldFileUrl })
+                })
+                console.log(r.json())
+
+            }) 
+        </script>
+        <script>
+            const updatedForm = document.querySelector("#updateBlogForm")
+
+            
+            updatedForm.addEventListener('submit', async (e) => {
+                e.preventDefault()
+                const thumbnailUrl = updatedForm.querySelector("input[name='thumbnailUrl']").value;
+            const title = updatedForm.querySelector("input[name='title']").value;
+            const tag = updatedForm.querySelector("select[name='tag']").value;
+            const desc = updatedForm.querySelector("textarea[name='desc']").value;
+            const body = updatedForm.querySelector("textarea[name='body']").value;
+
+            const data = {
+                thumbnailUrl,
+                title,
+                tag,
+                desc,
+                body
+            };
+            const res=  await   fetch(`/blog/<%=id%>`, {
+                    method: "PUT",
+                    headers:{
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data)
+                })
+
+                const response=await res.json()
+                if(response.success){
+                    location.href='/blog/<%=id%>'
+                }
+                else{
+                    console.log("not updated")
+                }
+            })
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%-include('partials/adminHead')%>
+<style>
+    body{
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    form>*{
+        display: block;
+        width: 100%;
+        margin:20px 0 ;
+    }
+    input{
+        padding: 5px;
+    }
+</style>
+</head>
+
+<body>
+  <%-include ('partials/adminNav')%>
+
+  <form action="/admin/newAdmin" method="post" style="width: 20%;">
+    <input type="text" name="adminId" id="name" placeholder="Id" required minlength="8">
+<!-- <input type="email" name="email" id="" placeholder="Email" required> -->
+<input type="password" name="password" id="" placeholder="Password" minlength="8" required>
+<input type="password" name="confirmPassword" id="" placeholder="Confirm Password" minlength="8" required>
+<button type="submit" style="cursor: pointer;">Submit</button>
+</form>
+</body>
+
+</html>

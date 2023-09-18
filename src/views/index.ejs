@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('partials/head')%>
+</head>
+
+<body>
+    <%-include('partials/nav')%>
+
+        <main>
+
+            <% for (let i=0;i<blogs.length;i++){ if(blogs[i].isStar){%>
+                <a href="/blog/<%=blogs[i]._id%>">
+                    <div class="feature-blog">
+                        <div class="img">
+                            <img src="<%=blogs[i].thumbnail%>" alt="">
+                        </div>
+                        <div class="blog-info">
+                            <p class="blog-tag">
+                                <%=blogs[i].tag%>
+                            </p>
+                            <h2>
+                                <%=blogs[i].title%>
+                            </h2>
+                            <p class="desc">
+                                <%=blogs[i].desc%>
+                            </p>
+                            <p class="date">
+                                <%= new Date(blogs[i].createdAt).getDate() %>
+                                <%= months[new Date(blogs[i].createdAt).getMonth()]%>
+                                    <%= new Date(blogs[i].createdAt).getFullYear() %>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <a href="/blog/<%=blogs[i]._id%>">
+                    <div class="mob-feature-blog" style="background-image: url('<%=blogs[i].thumbnail%>');">
+                        <h2>
+                            <%=blogs[i].title%>
+                        </h2>
+                        </div>
+                    </div>
+                </a>
+                <%i=blogs.length} }%>
+
+                 
+                    <div class="blogs-grid">
+                        <% if ( blogs.length> 0 ){ %>
+                            <% blogs.forEach(blog=>{%>
+                                <a href="/blog/<%=blog._id%>">
+                                    <div class="highlight-blog-img">
+                                        <img src="<%=blog.thumbnail%>" alt="">
+                                    </div>
+                                    <div class="highlight-blog-blog-info">
+                                        <p class="blog-tag">
+                                            <%=blog.tag%>
+                                        </p>
+                                        <h2>
+                                            <%=blog.title%>
+                                        </h2>
+                                        <p class="desc">
+                                            <%=blog.desc%>
+                                        </p>
+                                        <p class="date">
+                                            <%= new Date(blog.createdAt).getDate() %>
+                                                <%= months[new Date(blog.createdAt).getMonth()]%>
+                                                    <%= new Date(blog.createdAt).getFullYear() %>
+                                        </p>
+                                    </div>
+                                </a>
+                                <%})%>
+                                    <% } else { %>
+                                        <p>There are no vlogs to dispaly...</p>
+                                        <%}%>
+                    </div>
+
+
+        </main>
+        <%-include('partials/footer')%>
+           
+</body>
+
+</html>

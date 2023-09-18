@@ -1,0 +1,32 @@
+#updateBlogForm , form{
+    margin: 20px 0;
+    margin-left: 375px;
+    margin-right: 175px;
+  }
+  
+  #updateBlogForm > * {
+    display: block;
+    width: 100%;
+    margin: 30px 0;
+  }
+  
+  #updateBlogForm > input , select{
+    padding: 10px;
+    border: 1px solid #ccced1;
+  }
+  
+  #desc{
+      height: 100px;
+    padding: 10px;
+    border: 1px solid #ccced1;
+  
+  }
+  
+  #newBlogBtn{
+      cursor: pointer;
+      padding: 10px 7px;
+      display: inline;
+      background-color: skyblue;
+      border: none;
+  }
+  

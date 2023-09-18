@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Source+Serif+4:opsz,wght@8..60,300&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  max-width: 1480px;
+  margin: auto;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
+
+#sideNavBtn{
+  cursor: pointer;
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0.7rem 1.5rem;
+  font-family: "Roboto", sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0 1px 5px rgb(189, 189, 189);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul li {
+  list-style: none;
+  margin: 0 2rem;
+}
+
+nav ul li {
+  display: inline-block;
+  position: relative;
+  color: black;
+}
+
+nav ul li:hover a{
+  color: #F79822;
+  /* font-weight: 600; */
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: initial;
+  font-size: 1.2rem;
+}
+
+nav img {
+  aspect-ratio: 16/9;
+  display: inline;
+}
+
+
+.route a{
+  color: #F79822;
+}
+
+#navLinks{
+  display: none;
+}
+
+#sideNavLinks{
+  position: absolute;
+  right: -650px;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 80px 20px;
+  z-index: 99999;
+}
+
+#closeSideNavWithBg{
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background:transparent;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+#closeSideNav{
+width: 100%;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+padding: 0 40px;
+position: absolute;
+top: 25px;
+}
+
+#sideNavLinks >*{
+margin-bottom: 20px;
+}
+
+@media (min-width:710px) {
+
+  #navLinks{
+    display: initial;
+  }
+  #sideNavBtn{
+    display: none;
+  }
+  nav{
+  padding: 0.7rem 3rem;
+  }
+
+  nav ul li {
+    margin: 0 1rem;
+  }
+
+
+
+}
+
+
+@media (min-width: 1252px) {
+ 
+  nav ul li {
+    margin: 0 2rem;
+  }
+ 
+  nav{
+    padding: 0.7rem 5rem;
+    }
+}
+@media (min-width: 1405px) {
+}

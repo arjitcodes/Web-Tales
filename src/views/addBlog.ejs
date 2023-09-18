@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <%-include('partials/adminHead')%>
+        <link rel="stylesheet" href="/css/addBlog.css">
+</head>
+
+<body>
+
+    <%-include ('partials/adminNav')%>
+
+        <form id="form">
+            <input type="file" name="thumbnail" id="thumbnailInput" ">
+            <!-- <button type=" submit">Upload thumbnail</button> -->
+        </form>
+        <form action="/blog" method="post" id="newBlogForm">
+            <input type="text" name="title" id="title" placeholder="Title">
+            <select name="tag" id="tag">
+                <option value="javacript">javacript</option>
+                <option value="html">html</option>
+                <option value="css">css</option>
+                <option value="raect">raect</option>
+                <option value="nextjs">nextjs</option>
+                <option value="nodejs">nodejs</option>
+                <option value="expressjs">expressjs</option>
+                <option value="backend">backend</option>
+                <option value="monetize">monetize</option>
+                <option value="other">other</option>
+            </select>
+            <textarea type="text" name="desc" id="desc" placeholder="Description"></textarea>
+            <textarea name="body" id="editor"></textarea>
+            <input type="checkbox" id="isStar" name="isStar" value="true">
+            <label for="isStar"> Do you want this blog in feature</label><br>
+            <button type="submit" id="newBlogBtn">Publish</button>
+        </form>
+
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#editor'), {
+                    ckfinder: {
+                        uploadUrl: 'http://localhost:3000/uploadImage'
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+        <script>
+            document.getElementById("thumbnailInput").addEventListener("change", async function (e) {
+
+                e.preventDefault();
+                const form = document.getElementById("form")
+                const newBlogform = document.getElementById("newBlogForm")
+                let data = new FormData(form);
+                // data.append("isStar", true);
+                const response = await fetch("/uploadCover", {
+                    method: "POST",
+                    body: data
+                })
+                const url = await response.json()
+                const img = document.createElement("img")
+                const thumbnailInput = document.createElement("input")
+                thumbnailInput.value = url.url;
+                thumbnailInput.readOnly = true;
+                thumbnailInput.name = "thumbnailUrl"
+                thumbnailInput.style.display = "none"
+                newBlogform.prepend(thumbnailInput)
+                img.src = url.url;
+                img.width = 350
+                form.append(img)
+            })
+        </script>
+
+</body>
+
+</html>

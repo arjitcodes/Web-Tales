@@ -1,0 +1,48 @@
+.main {
+  width: 60vw;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+button{
+    cursor: pointer;
+}
+
+#mainBtn {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: skyblue;
+  border-radius: 30px;
+  border: 0;
+  margin: 20px 0;
+}
+
+.menu {
+  background: white;
+  /* border: 1px solid gray; */
+  text-align: center;
+  padding: 10px;
+}
+
+.menu ul > *{
+margin-right: 10px;
+display: inline-block;
+}
+
+.menu ul li {
+  list-style: none;
+}
+
+#heading-menu > *,
+#list-menu > * {
+  display: inline-block;
+  margin-right: 10px;
+
+}
+
+
+h2,p,h3,h4,li{
+ outline: 0;
+
+}
+

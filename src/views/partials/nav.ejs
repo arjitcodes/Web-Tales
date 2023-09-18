@@ -1,0 +1,53 @@
+<header>
+    <nav>
+        <a href="/"> <img src="/img/logo.png" alt="" width="160" height="40"></a>
+        <ul id="navLinks">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contacts">Contact Us</a></li>
+        </ul>
+        <i class="fa-solid fa-bars" id="sideNavBtn"></i>
+        <ul id="sideNavLinks">
+            <div id="closeSideNav"><i class="fa-solid fa-xmark" id="closeSideNavBtn" style="font-size: 25px;"></i></div>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contacts">Contact Us</a></li>
+        </ul>
+        <div id="closeSideNavWithBg"></div>
+    </nav>
+    <script>
+        const linkList = document.getElementById("navLinks").children
+        const path = location.pathname;
+        if (path === "/" || path.split("/")[1] === "blog") {
+            linkList[0].classList.add("route")
+        }
+        else if (path === '/about') {
+            linkList[1].classList.add("route")
+
+        }
+        else if (path === '/contacts') {
+            linkList[2].classList.add("route")
+
+        };
+
+        const sideNav = document.getElementById("sideNavLinks")
+        const openSideNavBtn = document.getElementById("sideNavBtn")
+        const closeSideNavBtn = document.getElementById("closeSideNavBtn")
+        const closeSideNavWithBg = document.getElementById("closeSideNavWithBg")
+
+        openSideNavBtn.addEventListener("click", () => {
+            sideNav.style.right = 0;
+            closeSideNavWithBg.style.display="block"
+        });
+        closeSideNavBtn.addEventListener("click", () => {
+            sideNav.style.right = "-650px";
+            closeSideNavWithBg.style.display="none"
+        });
+        closeSideNavWithBg.addEventListener("click",()=>{
+            sideNav.style.right = "-650px";
+            closeSideNavWithBg.style.display="none"
+        })
+
+
+    </script>
+</header>
